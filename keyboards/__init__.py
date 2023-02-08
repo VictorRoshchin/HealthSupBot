@@ -1,1 +1,1 @@
-from keyboards import client
+from keyboards import all

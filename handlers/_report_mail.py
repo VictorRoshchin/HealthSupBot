@@ -76,32 +76,6 @@ async def send_email(to_email, file):
         smtp.quit()
 
 
-async def get_report(entries: list, user_id):
-    etrs = [list(e)[:-1] for e in entries]
-    # for e in etrs:
-    #     date, time = e[3].split()
-    #     e[3] = date
-    #     e[4] = time
-    header = ['Верхнее давление', 'Нижнее давление', 'Пульс', 'Дата', 'Время']
-    report = openpyxl.Workbook()
-    report.create_sheet(title='Отчет', index=0)
-    table = report['Отчет']
-    for row in range(1, len(etrs) + 2):
-        if row == 1:
-            for col in range(1, len(header)+1):
-                value = header[col-1]
-                cell = table.cell(row=row, column=col)
-                cell.value = value
-        else:
-            for col in range(1, len(etrs[row-2])+1):
-                value = etrs[row-2][col-1]
-                cell = table.cell(row=row, column=col)
-                cell.value = value
-    report.save(f'report_{user_id}.xlsx')
-    return f'report_{user_id}.xlsx'
-
-
-async def send_report(entries_all, user_id, email):
-    report = await get_report(entries_all, user_id)
-    await send_email(email, report)
-    os.remove(f'./{report}')
+async def send_report(email, report_file):
+    await send_email(email, report_file)
+    os.remove(f'./{report_file}')

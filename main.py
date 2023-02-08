@@ -1,16 +1,16 @@
 from aiogram.utils import executor
 
-from bot_db import bot_sqlite
+from db_api import api_requests
 from create_bot import dp
-from handlers import client
+from handlers import register
 
 
 async def on_startup(_):
     print('Бот вышел в онлайн')
-    bot_sqlite.sql_start()
+    api_requests.db_start()
 
 
-client.register_handlers_client(dp)
+register.register_handlers(dp)
 
 
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
