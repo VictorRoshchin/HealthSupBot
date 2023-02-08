@@ -15,6 +15,8 @@ async def command_start(message: types.Message):
     :return: nothing
     '''
 
+    await api_requests.post(message.from_user.id, create_table=True)
+
     await bot.send_message(message.from_user.id,
                            'Бот разработан для ведения дневника давления\n'
                            'Поддерживаемый функционал:\n'
