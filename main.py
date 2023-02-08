@@ -1,13 +1,13 @@
 from aiogram.utils import executor
 
-from db_api import api_requests
+from db_api.api_requests import db_start
 from create_bot import dp
 from handlers import register
 
 
 async def on_startup(_):
     print('Бот вышел в онлайн')
-    api_requests.db_start()
+    db_start()
 
 
 register.register_handlers(dp)

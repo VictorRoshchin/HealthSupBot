@@ -1,7 +1,5 @@
 import sqlite3 as sq
-from datetime import datetime, date, time
-
-from create_bot import bot
+from datetime import datetime
 
 
 def db_start():
